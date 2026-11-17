@@ -1,0 +1,28 @@
+name: Rename LP to index.html
+
+on:
+  push:
+    branches: [gh-pages]
+
+permissions:
+  contents: write
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+      - name: Rename kai-shi-yarumontu-lp.html to index.html
+        run: |
+          if [ -f kai-shi-yarumontu-lp.html ]; then
+            mv kai-shi-yarumontu-lp.html index.html
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "kai-shi-yarumontu-lp.html を index.html に名前変更"
+            git push
+          else
+            echo "kai-shi-yarumontu-lp.html が存在しないため何もしません"
+          fi

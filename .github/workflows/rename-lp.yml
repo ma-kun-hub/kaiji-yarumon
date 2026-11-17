@@ -1,6 +1,8 @@
 name: Rename LP to index.html
 
 on:
+  push:
+    branches: [gh-pages]
   workflow_dispatch:
 
 permissions:

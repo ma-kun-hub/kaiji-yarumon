@@ -1,0 +1,27 @@
+name: Rename LP to index.html
+
+on:
+  push:
+    branches: [gh-pages]
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+      - name: Rename uploaded LP to index.html
+        run: |
+          if [ -f kai-shi-yarumontu-lp.html ]; then
+            mv kai-shi-yarumontu-lp.html index.html
+            git config user.name "ma-kun-hub"
+            git config user.email "ma-kun-hub@users.noreply.github.com"
+            git add -A
+            git commit -m "Publish updated landing page as index.html"
+            git push
+          else
+            echo "No kai-shi-yarumontu-lp.html to rename; nothing to do."
+          fi

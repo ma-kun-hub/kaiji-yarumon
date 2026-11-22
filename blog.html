@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>開示やるもんっ 開発日記</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #fff0f5;
+        --bg-deep: #ffe0ec;
+        --card: #ffffff;
+        --card-soft: #fff7fa;
+        --ink: #5b3049;
+        --ink-soft: #8a5a72;
+        --pink: #ff6fa5;
+        --pink-deep: #e84f8a;
+        --pink-pale: #ffd3e4;
+        --pink-mist: #ffe9f2;
+        --line: #ffc9dd;
+        --star: #ffb7d3;
+        --star-soft: #ffd9e8;
+        --shadow: 0 6px 0 rgba(232, 79, 138, 0.12), 0 14px 28px rgba(232, 79, 138, 0.1);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color-scheme: dark;
+          --bg: #2b1622;
+          --bg-deep: #3a1c2e;
+          --card: #3d2133;
+          --card-soft: #452739;
+          --ink: #ffe3ef;
+          --ink-soft: #e8b3cb;
+          --pink: #ff8fbc;
+          --pink-deep: #ff6fa5;
+          --pink-pale: #6e3550;
+          --pink-mist: #4d2a3d;
+          --line: #6e3550;
+          --star: #7a3c58;
+          --star-soft: #5c2c44;
+          --shadow: 0 6px 0 rgba(0, 0, 0, 0.25), 0 14px 28px rgba(0, 0, 0, 0.3);
+        }
+      }
+
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        font-family: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "Hiragino Sans",
+          "Yu Gothic UI", sans-serif;
+        color: var(--ink);
+        background-color: var(--bg);
+        /* 星パターン：小さな星をずらして敷き詰める */
+        background-image:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cpath d='M18 6l2.6 5.9 6.4.7-4.8 4.3 1.4 6.3L18 20l-5.6 3.2 1.4-6.3L9 12.6l6.4-.7z' fill='%23ffb7d3' fill-opacity='0.55'/%3E%3C/svg%3E"),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cpath d='M54 40l1.8 4.1 4.5.5-3.4 3 1 4.4-3.9-2.2-3.9 2.2 1-4.4-3.4-3 4.5-.5z' fill='%23ffd9e8' fill-opacity='0.8'/%3E%3C/svg%3E"),
+          linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+        background-size: 72px 72px, 72px 72px, 100% 100%;
+        background-position: 0 0, 36px 36px, 0 0;
+        background-attachment: scroll, scroll, fixed;
+        line-height: 1.8;
+      }
+
+      .wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 20px 18px 8px;
+      }
+
+      /* 戻るリンク */
+      .back {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        min-height: 40px;
+        padding: 6px 16px 6px 12px;
+        background: var(--card);
+        color: var(--pink-deep);
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-decoration: none;
+        border: 2px solid var(--line);
+        border-radius: 999px;
+        box-shadow: 0 3px 0 rgba(232, 79, 138, 0.15);
+        transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      }
+      .back:hover {
+        background: var(--pink-mist);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 0 rgba(232, 79, 138, 0.18);
+      }
+      .back:active { transform: translateY(1px); box-shadow: 0 1px 0 rgba(232, 79, 138, 0.15); }
+      .back:focus-visible { outline: 3px solid var(--pink); outline-offset: 2px; }
+
+      /* 見出し */
+      header.page-head {
+        text-align: center;
+        margin: 30px 0 8px;
+      }
+      .app-name {
+        margin: 0 0 4px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: var(--pink-deep);
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(2.1rem, 8vw, 3rem);
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        color: var(--ink);
+      }
+      h1 .star {
+        color: var(--pink);
+        font-size: 0.62em;
+        vertical-align: 0.45em;
+        margin: 0 0.12em;
+      }
+      .head-rule {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 14px auto 0;
+        color: var(--pink);
+        font-size: 0.9rem;
+      }
+      .head-rule::before,
+      .head-rule::after {
+        content: "";
+        width: 72px;
+        border-top: 3px dotted var(--pink-pale);
+      }
+
+      /* 冒頭の案内文 */
+      .intro {
+        margin: 22px 0 30px;
+        padding: 18px 22px;
+        background: var(--card-soft);
+        border: 2px dashed var(--line);
+        border-radius: 20px;
+        font-size: 1rem;
+      }
+      .intro p { margin: 0; }
+
+      /* エントリ一覧 */
+      .entries {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .entry {
+        position: relative;
+        background: var(--card);
+        border: 2px solid var(--line);
+        border-radius: 24px;
+        padding: 22px 24px 20px;
+        box-shadow: var(--shadow);
+      }
+      .entry::after {
+        content: "★";
+        position: absolute;
+        top: 14px;
+        right: 18px;
+        color: var(--star-soft);
+        font-size: 1.15rem;
+        line-height: 1;
+      }
+      .entry-date {
+        display: inline-block;
+        margin: 0 0 8px;
+        padding: 2px 14px;
+        background: var(--pink);
+        color: #fff;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        border-radius: 999px;
+      }
+      @media (prefers-color-scheme: dark) {
+        .entry-date { color: #2b1622; }
+      }
+      .entry h2 {
+        margin: 0 36px 8px 0;
+        font-size: 1.3rem;
+        font-weight: 800;
+        line-height: 1.5;
+        color: var(--ink);
+      }
+      .entry p {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--ink);
+      }
+      /* 最新エントリの目印 */
+      .entry--latest { border-color: var(--pink); }
+      .entry--latest::after { color: var(--pink); }
+      .latest-tag {
+        display: inline-block;
+        margin-left: 8px;
+        padding: 1px 10px;
+        vertical-align: 0.28em;
+        background: var(--pink-mist);
+        border: 1.5px solid var(--pink);
+        color: var(--pink-deep);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        border-radius: 999px;
+      }
+
+      footer {
+        margin: 40px 0 26px;
+        text-align: center;
+        color: var(--ink-soft);
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      footer .foot-stars {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--pink);
+        letter-spacing: 0.5em;
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: 480px) {
+        .wrap { padding: 16px 14px 4px; }
+        .entry { padding: 18px 18px 16px; border-radius: 20px; }
+        .entry h2 { font-size: 1.18rem; }
+        .intro { padding: 16px 18px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <nav>
+        <a class="back" href="index.html">← 公式ページに戻る</a>
+      </nav>
+
+      <header class="page-head">
+        <p class="app-name">開示やるもんっ</p>
+        <h1><span class="star" aria-hidden="true">★</span>開発日記<span class="star" aria-hidden="true">★</span></h1>
+        <div class="head-rule" aria-hidden="true">★</div>
+      </header>
+
+      <div class="intro">
+        <p>アプリの更新や、ダウンロード数の節目などを書いていく日記です。感想や応援のコメントは、Xの告知ポストの引用ポストでいただけると嬉しいです。</p>
+      </div>
+
+      <ol class="entries">
+        <li class="entry entry--latest">
+          <p class="entry-date"><time datetime="2026-11-22">2026年11月22日</time></p>
+          <h2>のべ300ダウンロード突破！<span class="latest-tag">最新</span></h2>
+          <p>リリースから約1週間で、のべ300ダウンロードに届きました。入れてくれたみなさん、広めてくれたみなさん、ありがとうございます。これからもコツコツ宣伝していきます。</p>
+        </li>
+
+        <li class="entry">
+          <p class="entry-date"><time datetime="2026-11-17">2026年11月17日</time></p>
+          <h2>公式ホームページができました</h2>
+          <p>『開示やるもんっ』の公式ページがオープンしました。画面紹介や使い方、やる子のキャラ紹介を載せています。</p>
+        </li>
+
+        <li class="entry">
+          <p class="entry-date"><time datetime="2026-11-16">2026年11月16日</time></p>
+          <h2>200ダウンロード到達</h2>
+          <p>リリースから3日で、のべ200ダウンロードに到達しました。思っていたよりずっと早いペースでびっくりしています。</p>
+        </li>
+
+        <li class="entry">
+          <p class="entry-date"><time datetime="2026-11-14">2026年11月14日</time></p>
+          <h2>『書き出し』機能を追加しました</h2>
+          <p>さっそく使ってくれた方から『集めた証拠を送れるようにしたい』と要望をいただいて、アカウントごとに、投稿と証拠をまとめてZIPで書き出す機能を追加しました。アプリの中にQ＆Aと利用規約のページも入れました。</p>
+        </li>
+
+        <li class="entry">
+          <p class="entry-date"><time datetime="2026-11-13">2026年11月13日</time></p>
+          <h2>『開示やるもんっ』リリース</h2>
+          <p>証拠集めアプリ『開示やるもんっ』を公開しました。Xで気になる投稿とスクショを集めて、紐づけて残すだけのシンプルなアプリです。この日は、やる子の誕生日でもあります。</p>
+        </li>
+      </ol>
+
+      <footer>
+        <span class="foot-stars" aria-hidden="true">★ ★ ★</span>
+        © まーくん
+      </footer>
+    </div>
+  </body>
+</html>

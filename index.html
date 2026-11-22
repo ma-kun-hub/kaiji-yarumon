@@ -879,6 +879,9 @@
             <li><a class="nav" href="#updates">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l2.4 6.2L21 9l-5 4.4L17.5 20 12 16.6 6.5 20 8 13.4 3 9l6.6-.8z" fill="#ffcf4d" stroke="#d9a400" stroke-width="1"/></svg>
               アップデート情報<span class="go">→</span></a></li>
+            <li><a class="nav" href="blog.html">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 3h13a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H5z" fill="#f2709c"/><path d="M5 3v18" stroke="#e7548c" stroke-width="2.4"/><path d="M9 8h6M9 12h6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+              開発日記<span class="go">→</span></a></li>
             <li><a class="nav" href="#qa">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#6db9e8"/><path d="M9.5 9.3c.3-1.3 1.3-2 2.6-2 1.4 0 2.5.9 2.5 2.1 0 1.7-2.3 2-2.3 3.4" stroke="#fff" stroke-width="1.9" fill="none" stroke-linecap="round"/><circle cx="12.3" cy="16.8" r="1.3" fill="#fff"/></svg>
               Q＆A（よくある質問）<span class="go">→</span></a></li>
@@ -1048,6 +1051,10 @@
         <p class="sec-lead">最新版は v1.21 です。ダウンロードすると、いつも最新版が手に入ります。</p>
         <ul class="updates">
           <li>
+            <span class="v">v1.22</span><span class="date">2026-11-22</span>
+            <p>Q＆Aに「スクショ1発での管理はできないの？」を追加しました。</p>
+          </li>
+          <li>
             <span class="v">v1.21</span><span class="date">2026-11-14</span><span class="new">最新版</span>
             <p>書き出したZIPのファイル名がWindowsで文字化けする問題を、より確実な方法で修正しました。</p>
           </li>
@@ -1130,6 +1137,10 @@
         <details>
           <summary><span class="q">Q10</span>書き出したZIPは、どうやって送るのがいいですか？<span class="arrow">▽</span></summary>
           <div class="a"><p>Googleドライブに書き出すことを推奨します。メールで送る場合は、相手の迷惑メールフォルダに入ってしまうことがあるので、アドレスに必ず「迷惑メールフォルダ」をご確認ください。</p></div>
+        </details>
+        <details>
+          <summary><span class="q">Q11</span>スクショ1発での管理はできないの？<span class="arrow">▽</span></summary>
+          <div class="a"><p>できません。スクショには投稿のURLが写っていないので、文字を読めても「どの投稿の証拠か」が自動では分からず、どの道URLを入れる2ステップ目が必要になります。今の「共有でURLと日時を入れて、スクショを足す」形が一番速い、という設計です。アプリを軽く保つためと、権限ゼロ・通信なしを守るため、自動で読み取る仕組みも入れていません。</p></div>
         </details>
         <p class="back-menu-wrap"><a class="back-menu" href="#menu">↑ おへやメニューにもどる</a></p>
       </section>

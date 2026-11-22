@@ -69,10 +69,28 @@
         line-height: 1.8;
       }
 
+      /* 固定ヘッダーバー：スクロールしても常に見える */
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--pink-mist);
+        border-bottom: 2px solid var(--line);
+        box-shadow: 0 4px 14px rgba(232, 79, 138, 0.1);
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+      .topbar-inner {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 8px 18px;
+        display: flex;
+        align-items: center;
+      }
+
       .wrap {
         max-width: 720px;
         margin: 0 auto;
-        padding: 20px 18px 8px;
+        padding: 12px 18px 8px;
       }
 
       /* 戻るリンク */
@@ -103,7 +121,7 @@
       /* 見出し */
       header.page-head {
         text-align: center;
-        margin: 30px 0 8px;
+        margin: 18px 0 8px;
       }
       .app-name {
         margin: 0 0 4px;
@@ -237,7 +255,8 @@
       }
 
       @media (max-width: 480px) {
-        .wrap { padding: 16px 14px 4px; }
+        .topbar-inner { padding: 8px 14px; }
+        .wrap { padding: 10px 14px 4px; }
         .entry { padding: 18px 18px 16px; border-radius: 20px; }
         .entry h2 { font-size: 1.18rem; }
         .intro { padding: 16px 18px; }
@@ -245,10 +264,14 @@
     </style>
   </head>
   <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <nav aria-label="公式ページへ戻る">
+          <a class="back" href="index.html">← 公式ページに戻る</a>
+        </nav>
+      </div>
+    </header>
     <div class="wrap">
-      <nav>
-        <a class="back" href="index.html">← 公式ページに戻る</a>
-      </nav>
 
       <header class="page-head">
         <p class="app-name">開示やるもんっ</p>
